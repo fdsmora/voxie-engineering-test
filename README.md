@@ -17,7 +17,7 @@ framework.
 
 ## Prompt
 
-We need to process an incoming JSON request containing team, contact, and a contact's custom attribute data. These
+We need to process an incoming JSON request containing team, contact, and each contact's custom attribute data. These
 requests will always contain a team name, but all other data is optional. Below is an example of a possible incoming
 JSON request.
 ```json
