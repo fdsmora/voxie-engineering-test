@@ -64,7 +64,7 @@ import-linux                  Send an import JSON request to :8000/import on a l
 import                        Send an import JSON request to :8000/import
 ```
 
-Feel free to all all of your project work into the `project` directory within this repository.
+Feel free to place all of your project work into the `project` directory within this repository.
 
 ## Database
 
