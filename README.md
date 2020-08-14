@@ -20,7 +20,7 @@ framework.
 We need to process an incoming JSON request containing team, contact, and each contact's custom attribute data. These
 requests will always contain a team name, but all other data is optional. Below is an example of a possible incoming
 JSON request.
-```json
+```jsonc
 {
   "name": "Michigan kangaroos",
   "contacts": [
@@ -43,7 +43,7 @@ JSON request.
 }
 ```
 This is another valid request containing the minimal amount of data possible in a request.
-```json
+```jsonc
 {
   "name": "Nevada owls"
 }
@@ -58,7 +58,7 @@ development process.
 ## Usage
 
 There is a Makefile provided for your convenience — just run `make [command]` to get started.
-```sh
+```
 db                            Start local development mysql database on :3306
 import-linux                  Send an import JSON request to :8000/import on a linux-platform
 import                        Send an import JSON request to :8000/import
