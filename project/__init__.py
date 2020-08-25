@@ -23,12 +23,17 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from . import db
+    db.init_app(app)
+
     # a simple page that says hello
-    @app.route('/hello')
+    @app.route('/hello/')
     def hello():
         return 'Hello, World!'
 
-    from . import db
-    db.init_app(app)
+#    from . import show 
+#    app.register_blueprint(show.bp)
+    from . import webservice
+    app.register_blueprint(webservice.bp)
 
     return app
