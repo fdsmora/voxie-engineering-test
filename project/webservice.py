@@ -7,9 +7,9 @@ from flask import (
 
 from project.db import get_db
 
-bp = Blueprint('webservice', __name__)
+bp = Blueprint('import', __name__)
 
-@bp.route('/add_team/<name>', methods=('POST','GET'))
+@bp.route('/import/<name>', methods=('POST','GET'))
 def add_team(name):
     if request.method == 'GET':
         db = get_db()
