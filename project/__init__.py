@@ -33,8 +33,8 @@ def create_app(test_config=None):
 
 #    from . import show 
 #    app.register_blueprint(show.bp)
-    from . import webservice
-    app.register_blueprint(webservice.bp)
+    from . import import_team
+    app.register_blueprint(import_team.bp)
 
     from . import view
     app.register_blueprint(view.bp)
