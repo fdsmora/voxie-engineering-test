@@ -36,4 +36,7 @@ def create_app(test_config=None):
     from . import webservice
     app.register_blueprint(webservice.bp)
 
+    from . import view
+    app.register_blueprint(view.bp)
+
     return app
