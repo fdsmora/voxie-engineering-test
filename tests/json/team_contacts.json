@@ -1,0 +1,20 @@
+{
+  "name": "Kangaroos",
+  "contacts": [
+    {
+      "name": "Mrs. Lewis Kuvalis",
+      "phone": "+15551498011",
+      "custom_attributes": [
+        {
+          "key": "7LPkDHh6",
+          "value": "Wh1st3Bc"
+        }
+      ]
+    },
+    {
+      "name": "Nova Bradtke",
+      "phone": "+15559382668",
+      "email": "constantin.pacocha@example.net"
+    }
+  ]
+}
