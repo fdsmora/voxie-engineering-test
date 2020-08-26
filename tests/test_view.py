@@ -15,4 +15,4 @@ def test_view(client, app):
     response = client.get('/view')
     assert response.status_code == 200
     for name in test_team_names:
-        assert bytes(name) in response.data
+        assert name.encode('utf-8') in response.data
