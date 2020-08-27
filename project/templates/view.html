@@ -4,19 +4,18 @@
   <h1>{% block title %}Teams{% endblock %}</h1>
 {% endblock %}
 
-<div>
-    <table>
-        <tr>
-            <th>Team</th>
-        </tr>
-        {% block content %}
-          {% for team in teams%}
-          <tr>
-              <td>
-                 {{ team['name'] }}
-              </td>
-          </tr>
-          {% endfor %}
-        {% endblock %}
-    </table>
-</div>
+{% block content %}
+  {% for team in teams %}
+    <article class="post">
+      <header>
+        <div>
+          <h1>{{ team['name'] }}</h1>
+        </div>
+          <a class="action" href="{{ url_for('team_detail.view_teams', team_id=team['id'])}}">Edit</a>
+      </header>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

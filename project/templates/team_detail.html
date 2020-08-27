@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Team detail for "{{ team.name }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="name">Name:</label>
+    <input name="name" id="title" value="{{ team.name }}" required>
+    {% if team.contacts|length > 0 %}
+        <table>
+            <tr>
+                <th>Name</th><th>Phone</th><th>Email</th><th>Has custom attributes</th>
+            </tr>
+           {% for contact in team.contacts %}
+               <tr>
+                   <td>{{ contact.name }}</td>
+                   <td>{{ contact.phone }}</td>
+                   <td>{{ contact.email }}</td>
+                   <td>{% if contact.custom_attributes|length > 0 %} yes {% else %} no {% endif %}</td>
+<!--                   <td><a class="action" href="{{ url_for('contact.edit', contact_id=contact.id)}}">Edit</a></td>-->
+               </tr>
+           {% endfor %}
+        </table>
+    {% else %} 
+       <label>Team has no contacts</label> 
+    {% endif %}
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}

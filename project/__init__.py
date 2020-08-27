@@ -31,12 +31,13 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
 
-#    from . import show 
-#    app.register_blueprint(show.bp)
     from . import import_team
     app.register_blueprint(import_team.bp)
 
     from . import view
     app.register_blueprint(view.bp)
+
+    from . import team_detail 
+    app.register_blueprint(team_detail.bp)
 
     return app
