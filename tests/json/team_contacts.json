@@ -15,6 +15,25 @@
       "name": "Nova Bradtke",
       "phone": "+15559382668",
       "email": "constantin.pacocha@example.net"
+    },
+    {
+      "name": "Lalo Landa",
+      "phone": "+13339382668",
+      "email": "landa.lalo@example.com",
+      "custom_attributes": [
+        {
+          "key": "account",
+          "value": "fdsmr"
+        },
+        {
+          "key": "key2",
+          "value": "perro"
+        },
+        {
+          "key": "abc",
+          "value": "12345"
+        }
+      ]
     }
   ]
 }
