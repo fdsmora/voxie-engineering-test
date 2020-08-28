@@ -19,7 +19,6 @@
                    <td>{{ contact.phone }}</td>
                    <td>{{ contact.email }}</td>
                    <td>{% if contact.custom_attributes|length > 0 %} yes {% else %} no {% endif %}</td>
-<!--                   <td><a class="action" href="{{ url_for('contact.edit', contact_id=contact.id)}}">Edit</a></td>-->
                </tr>
            {% endfor %}
         </table>

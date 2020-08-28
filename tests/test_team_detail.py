@@ -9,7 +9,7 @@ def test_team_detail(client, app):
         row = get_db().execute('SELECT MAX(id) FROM teams').fetchone()
         team_id = row[0]
 
-    response = client.get("/test_detail/{}".format(team_id))
+    response = client.get("/team_detail/{}".format(team_id))
     assert response.status_code == 200 
 
     assert b'Name' in response.data
