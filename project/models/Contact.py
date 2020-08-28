@@ -2,24 +2,36 @@ from project.models.CustomAttribute import CustomAttribute
 from project.db import get_db
 
 class Contact:
-    def __init__(self, id, name, phone, email):
-        self.id = id
-        self.name = name
-        self.phone = phone
-        self.email = email
+    def __init__(self, **kwargs):
+        self.id = kwargs.get('id')
+        self.team_id = kwargs.get('team_id')
+        self.name = kwargs.get('name')
+        self.phone = kwargs.get('phone')
+        self.email = kwargs.get('email')
         self.custom_attributes = []
+
+    def update(self):
+        db = get_db()
+
+        row = db.execute(
+            'UPDATE contacts SET name=?,phone=?,email=? WHERE id = ?', 
+            (self.name,self.phone,self.email,self.id,) 
+        ).fetchone()
+ 
+        db.commit()
+        
 
     @staticmethod
     def load_contact(id):
         db = get_db()
 
         row = db.execute(
-            'SELECT id,name,phone,email FROM contacts WHERE id = ?', 
+            'SELECT * FROM contacts WHERE id = ?', 
             (id,) 
         ).fetchone()
  
         if row :
-            contact = Contact(row['id'],row['name'],row['phone'],row['email']) 
+            contact = Contact(id=row['id'],team_id=row['team_id'],name=row['name'],phone=row['phone'],email=row['email']) 
 
             contact.load_custom_attributes()
 
@@ -38,7 +50,7 @@ class Contact:
                 (team_id,) 
             ).fetchall()
 
-            contacts = [Contact(row['id'],row['name'],row['phone'],row['email']) for row in contacts_rows if contacts_rows]
+            contacts = [Contact(id=row['id'],name=row['name'],phone=row['phone'],email=row['email']) for row in contacts_rows if contacts_rows]
 
             for contact in contacts:
                 contact.load_custom_attributes()

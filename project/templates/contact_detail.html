@@ -5,67 +5,112 @@
 {% endblock %}
 
 {% block content %}
-    <label for="name">Name:</label>
-    <input name="name" id="title" value="{{ contact.name }}" required>
+    <form id="frm_contact" method="post" action="{{ url_for('contact_detail.update_contact')  }}" >
+      <div>
+        <input type="hidden" name="contact_id" value="{{ contact.id }}" />
+        <input type="hidden" name="team_id" value="{{ contact.team_id }}" />
+        <div>
+           <label for="name">Name:</label>
+           <span class="content" name="name" id="lb_name">{{ contact.name }}</span>
+           <input name="name" id="txt_name" value="{{ contact.name }}" required>
+        </div>
+        <div>
+           <label for="phone">Phone:</label>
+           <span class="content" name="phone" id="lb_phone">{{ contact.phone}}</span>
+           <input name="phone" id="txt_phone" value="{{ contact.phone }}" required>
+        </div>
+        {% if contact.email %}
+        <div>
+           <label for="email">Email:</label>
+           <span class="content" name="email" id="lb_email">{{ contact.email }}</span>
+           <input name="email" id="txt_email" value="{{ contact.email }}" required>
+        </div>
+        {% endif %}
+        <a id="edit" class="action" href="#">Edit</a>
+        <input type="submit" value="Save" id="btn_save_contact" />
+       </div>
+    </form>
     {% if contact.custom_attributes|length > 0 %}
     <form id="frm_cust_attr" method="post" action="{{ url_for('contact_detail.update_custom_attribute') }}">
-        <input type="hidden" name="hd_contact_id" value="{{ contact.id }}" />
-        <input type="hidden" id="hd_ca_id" name="hd_custom_attribute_id" value="" />
-        <table>
-            <tr>
-                <th>Key</th><th>Value</th>
-            </tr>
+        <input type="hidden" id="hf_selected_custom_attribute_id" name="custom_attribute_id" value="" />
+        <input type="hidden" id="hf_contact_id" name="contact_id" value="{{ contact.id }}" />
+
+        <div class="table">
+            <div class="tr">
+               <span class="th">Key</span>
+               <span class="th">Value</span>
+            </div>
+
            {% for ca in contact.custom_attributes %}
-               <tr>
-                   <td>
-                       <span id="lb_key_{{ca.id}}">{{ ca.key }}</span>
-                       <input type="text" id="txt_key_{{ca.id}}" name="key_{{ca.id}}" value="{{ ca.key }}" style="display:none"/>
-                   </td>
-                   <td>
-                       <span id="lb_value_{{ca.id}}" >{{ ca.value }}</span>
-                       <input type="text" id="txt_value_{{ca.id}}" name="value_{{ca.id}}" value="{{ ca.value}}" style="display:none"/>
-                   </td>
-                   <td>
-                     <a id="edit_{{ca.id}}" class="action" href="#" onclick="switch_to_edit_mode()">Edit</a>
-                        <input type="submit" value="Save" id="save_{{ca.id}}"  style="display:none"/>
-                   </td>
-               </tr>
+            <div class="tr">
+               <span class="td">
+                  <span class="content" id="lb_key_{{ca.id}}">{{ ca.key }}</span>
+                  <input type="text" id="txt_key_{{ca.id}}" name="key_{{ca.id}}" value="{{ ca.key }}"/>
+               </span>
+               <span class="td">
+                  <span class="content" id="lb_value_{{ca.id}}" >{{ ca.value }}</span>
+                  <input type="text" id="txt_value_{{ca.id}}" name="value_{{ca.id}}" value="{{ ca.value}}"/>
+               </span>
+               <span class="td">
+                  <a id="edit_{{ca.id}}" class="action" href="#" >Edit</a>
+                  <input type="submit" value="Save" id="save_{{ca.id}}" />
+               </span>
+            </div>
            {% endfor %}
-        </table>
+        </div>
     </form>
     {% else %} 
        <label>Contact has no custom attributes</label> 
     {% endif %}
+    <a href="{{ url_for('team_detail.view_teams', team_id=contact.team_id)  }}" class="return">Back</a>
 <script language="JavaScript">
+$(document).ready(
+  function(){
+    $("form a").click(function(){ 
+        if ($(this).text()=="Edit"){
+            $(".action").hide();
+        
+            var closestParentRow = $(this).parent().closest('div').eq(0);
+            closestParentRow.find(".content").hide();
+            closestParentRow.find("input").show();
+        }
+    });
 
-function switch_to_edit_mode() {
-   var src_elem = window.event.srcElement.id;
-   if (src_elem.substring(0,4) == "edit"){
-       var tokens = src_elem.split("_");
-
-       var id = tokens[tokens.length-1];
-
-       let elems = ['lb_key','lb_value','edit'];
-
-       display_elements(false,elems,id);
-
-       elems = ['txt_key','txt_value','save'];
-       display_elements(true,elems,id);
-
-       hf = document.getElementById('hd_ca_id');
-       hf.value=id;
-   }
-}
-
-function display_elements(value, elements, id) {
-  var display_value = value? 'block' : 'none';
-  for (var i=0; i < elements.length; i++){
-      var name = elements[i]+'_'+id;
-      document.getElementById(name).style.display=display_value;
-  }
-}
-
+    $("#frm_cust_attr input[type='submit']").click(function(){
+        var tokens = $(this).attr('id').split('_');
+        var id = tokens[tokens.length - 1];
+        $('#hf_selected_custom_attribute_id').val(id); 
+    });
+});
 </script>
+
+<style>
+form input{
+  display:none
+}
+
+div.table 
+{
+    display:table;
+}
+div.tr{
+    display:table-row;
+}
+span.td, span.th
+{
+    display:table-cell;
+}
+
+span.th
+{
+    font-weight: bold; 
+}
+
+.return
+{
+    float:right;
+}
+</style>
 
 {% endblock %}
 

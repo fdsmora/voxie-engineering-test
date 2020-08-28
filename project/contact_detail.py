@@ -18,13 +18,29 @@ def edit(contact_id):
 
     return render_template('contact_detail.html', contact=contact)
 
+@bp.route('/contact_detail/update_contact', methods=('POST',))
+def update_contact():
+    if request.method == 'POST':
+        contact_id = request.form.get('contact_id')
+        new_name = request.form.get('name')
+        new_phone = request.form.get('phone')
+        new_email = request.form.get('email')
+
+        contact = Contact(id=contact_id,name=new_name,phone=new_phone,email=new_email) 
+
+        contact.update()
+
+        return redirect(url_for('contact_detail.edit', contact_id=contact_id))
+
+    abort(400, description="Could not update contact")
+
 @bp.route('/contact_detail/update_custom_attribute/', methods=('POST',))
 def update_custom_attribute():
     if request.method == 'POST':
-        new_ca_id = request.form['hd_custom_attribute_id'];
+        new_ca_id = request.form['custom_attribute_id'];
         new_key = request.form['key_{}'.format(new_ca_id)]
         new_value = request.form['value_{}'.format(new_ca_id)]
-        contact_id = request.form['hd_contact_id']
+        contact_id = request.form['contact_id']
 
         ca = CustomAttribute(id=new_ca_id, key=new_key, value=new_value, contact_id=contact_id)
 
