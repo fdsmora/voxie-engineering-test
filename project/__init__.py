@@ -40,4 +40,7 @@ def create_app(test_config=None):
     from . import team_detail 
     app.register_blueprint(team_detail.bp)
 
+    from . import contact_detail 
+    app.register_blueprint(contact_detail.bp)
+
     return app

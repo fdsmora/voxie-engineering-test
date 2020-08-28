@@ -19,23 +19,8 @@ class Team:
         if team_row:
             team = Team(team_row['id'],team_row['name']) 
 
-            team.load_contacts()
+            team.contacts = Contact.load_contacts_by_team_id(id)
 
             return team
 
         return None
-
-    def load_contacts(self):
-        if (self.id):
-            db = get_db()
-
-            contacts_rows = db.execute(
-                'select c.id, c.name, phone, email from contacts c inner join teams t on c.team_id=t.id where t.id=?',
-                (self.id,) 
-            ).fetchall()
-
-            self.contacts = [Contact(row['id'],row['name'],row['phone'],row['email']) for row in contacts_rows if contacts_rows]
-
-            for contact in self.contacts:
-                contact.load_custom_attributes()
-                    
