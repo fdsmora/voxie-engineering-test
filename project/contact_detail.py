@@ -11,7 +11,7 @@ bp = Blueprint('contact_detail', __name__)
 @bp.route('/contact_detail/edit/<int:contact_id>', methods=('GET',))
 def edit(contact_id):
     if request.method == 'GET':
-        contact = Contact.load_contact(contact_id)
+        contact = Contact.load_by_id(contact_id)
 
         if not contact:
             abort(400, description="Could not load contact from DB")
@@ -48,4 +48,15 @@ def update_custom_attribute():
 
         return redirect(url_for('contact_detail.edit', contact_id=contact_id))
 
-    abort(400, description="Could not update custom attribute")
+@bp.route('/contact_detail/delete/<int:contact_id>', methods=('GET',))
+def delete(contact_id):
+    if request.method == 'GET':
+        # load contact just to get team_id 
+        contact = Contact.load_by_id(contact_id)
+        team_id = contact.team_id
+
+        Contact.delete(contact_id)
+
+        return redirect(url_for('team_detail.view_teams', team_id=team_id))
+
+    abort(400, description="Could not delete contact")   

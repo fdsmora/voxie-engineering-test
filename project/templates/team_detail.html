@@ -29,7 +29,7 @@
                    <td>{% if contact.custom_attributes|length > 0 %} yes {% else %} no {% endif %}</td>
                    <td>
                        <a class="action" href="{{ url_for('contact_detail.edit', contact_id=contact.id) }}">See detail</a>
-                       <a class="action" href="{{ url_for('contact_detail.edit', contact_id=contact.id) }}">Delete</a>
+                       <a class="action" href="{{ url_for('contact_detail.delete', contact_id=contact.id) }}" onclick="return confirm('Are you sure you want to delete this team?')">Delete</a>
                    </td>      
                </tr>
            {% endfor %}

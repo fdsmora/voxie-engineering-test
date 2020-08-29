@@ -39,4 +39,4 @@ def delete(team_id):
 
         return redirect(url_for('view.view_teams'))
 
-    abort(400, description="Could not update team")
+    abort(400, description="Could not delete team")

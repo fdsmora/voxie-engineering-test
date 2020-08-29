@@ -22,7 +22,7 @@ class Contact:
         
 
     @staticmethod
-    def load_contact(id):
+    def load_by_id(id):
         db = get_db()
 
         row = db.execute(
@@ -56,6 +56,12 @@ class Contact:
                 contact.load_custom_attributes()
 
         return contacts
+
+    @staticmethod
+    def delete(contact_id):
+        db = get_db()
+        db.execute('DELETE FROM contacts WHERE id = ?', (contact_id,))
+        db.commit()
 
     def load_custom_attributes(self):
         if self.id:
