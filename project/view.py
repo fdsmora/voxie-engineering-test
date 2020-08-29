@@ -3,15 +3,14 @@ from flask import (
 )
 
 from project.db import get_db
+from project.models.Team import Team
 
 bp = Blueprint('view', __name__)
 
 @bp.route('/view', methods=('GET',))
 def view_teams():
+    teams = [] 
     if request.method == 'GET':
-        db = get_db()
+        teams = Team.load_teams()
 
-        teams = db.execute(
-            'SELECT id,name FROM teams'
-        ).fetchall()
     return render_template('view.html', teams=teams)

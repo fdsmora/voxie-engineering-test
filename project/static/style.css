@@ -4,6 +4,37 @@ html {
   padding: 1rem;
 }
 
+table tr td {
+  text-align: center;
+}
+
+form .editmode {
+  display:none
+}
+
+div.table 
+{
+    display:table;
+}
+div.tr{
+    display:table-row;
+}
+
+span.td, span.th
+{
+    display:table-cell;
+}
+
+span.th
+{
+    font-weight: bold; 
+}
+
+.return
+{
+    float:right;
+}
+
 body {
   max-width: 960px;
   margin: 0 auto;
@@ -51,11 +82,8 @@ nav ul  {
 
 nav ul li a, nav ul li span, header .action {
   display: block;
+  float: right;
   padding: 0.5rem;
-}
-
-table tr td {
-  text-align: center;
 }
 
 .content {

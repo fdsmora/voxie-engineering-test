@@ -11,23 +11,24 @@
         <input type="hidden" name="team_id" value="{{ contact.team_id }}" />
         <div>
            <label for="name">Name:</label>
-           <span class="content" name="name" id="lb_name">{{ contact.name }}</span>
-           <input name="name" id="txt_name" value="{{ contact.name }}" required>
+           <span class="viewmode" name="name" id="lb_name">{{ contact.name }}</span>
+           <input class="editmode" name="name" id="txt_name" value="{{ contact.name }}">
         </div>
         <div>
            <label for="phone">Phone:</label>
-           <span class="content" name="phone" id="lb_phone">{{ contact.phone}}</span>
-           <input name="phone" id="txt_phone" value="{{ contact.phone }}" required>
+           <span class="viewmode" name="phone" id="lb_phone">{{ contact.phone}}</span>
+           <input class="editmode" name="phone" id="txt_phone" value="{{ contact.phone }}">
         </div>
         {% if contact.email %}
         <div>
            <label for="email">Email:</label>
-           <span class="content" name="email" id="lb_email">{{ contact.email }}</span>
-           <input name="email" id="txt_email" value="{{ contact.email }}" required>
+           <span class="viewmode" name="email" id="lb_email">{{ contact.email }}</span>
+           <input class="editmode" name="email" id="txt_email" value="{{ contact.email }}">
         </div>
         {% endif %}
-        <a id="edit" class="action" href="#">Edit</a>
-        <input type="submit" value="Save" id="btn_save_contact" />
+        <a id="edit" class="viewmode" href="#">Edit</a>
+        <input class="editmode" type="submit" value="Save" id="btn_save_contact" />
+        <a class="editmode" href="#!">Cancel</a>
        </div>
     </form>
     {% if contact.custom_attributes|length > 0 %}
@@ -42,18 +43,19 @@
             </div>
 
            {% for ca in contact.custom_attributes %}
-            <div class="tr">
+            <div class="tr" id="tr_{{ca.id}}">
                <span class="td">
-                  <span class="content" id="lb_key_{{ca.id}}">{{ ca.key }}</span>
-                  <input type="text" id="txt_key_{{ca.id}}" name="key_{{ca.id}}" value="{{ ca.key }}"/>
+                  <span class="viewmode" id="lb_key_{{ca.id}}">{{ ca.key }}</span>
+                  <input class="editmode" type="text" id="txt_key_{{ca.id}}" name="key_{{ca.id}}" value="{{ ca.key }}"/>
                </span>
                <span class="td">
-                  <span class="content" id="lb_value_{{ca.id}}" >{{ ca.value }}</span>
-                  <input type="text" id="txt_value_{{ca.id}}" name="value_{{ca.id}}" value="{{ ca.value}}"/>
+                  <span class="viewmode" id="lb_value_{{ca.id}}" >{{ ca.value }}</span>
+                  <input class="editmode" type="text" id="txt_value_{{ca.id}}" name="value_{{ca.id}}" value="{{ ca.value}}"/>
                </span>
                <span class="td">
-                  <a id="edit_{{ca.id}}" class="action" href="#" >Edit</a>
-                  <input type="submit" value="Save" id="save_{{ca.id}}" />
+                  <a id="edit_{{ca.id}}" class="viewmode" href="#" >Edit</a>
+                  <input class="editmode" type="submit" value="Save" id="save_{{ca.id}}" />
+                  <a class="editmode" href="#!">Cancel</a>
                </span>
             </div>
            {% endfor %}
@@ -63,54 +65,14 @@
        <label>Contact has no custom attributes</label> 
     {% endif %}
     <a href="{{ url_for('team_detail.view_teams', team_id=contact.team_id)  }}" class="return">Back</a>
-<script language="JavaScript">
-$(document).ready(
-  function(){
-    $("form a").click(function(){ 
-        if ($(this).text()=="Edit"){
-            $(".action").hide();
-        
-            var closestParentRow = $(this).parent().closest('div').eq(0);
-            closestParentRow.find(".content").hide();
-            closestParentRow.find("input").show();
-        }
-    });
 
-    $("#frm_cust_attr input[type='submit']").click(function(){
-        var tokens = $(this).attr('id').split('_');
-        var id = tokens[tokens.length - 1];
-        $('#hf_selected_custom_attribute_id').val(id); 
-    });
+<script>
+$("#frm_cust_attr input[type='submit']").click(function(){
+    var tokens = $(this).attr('id').split('_');
+    var id = tokens[tokens.length - 1];
+    $('#hf_selected_custom_attribute_id').val(id); 
 });
 </script>
-
-<style>
-form input{
-  display:none
-}
-
-div.table 
-{
-    display:table;
-}
-div.tr{
-    display:table-row;
-}
-span.td, span.th
-{
-    display:table-cell;
-}
-
-span.th
-{
-    font-weight: bold; 
-}
-
-.return
-{
-    float:right;
-}
-</style>
 
 {% endblock %}
 

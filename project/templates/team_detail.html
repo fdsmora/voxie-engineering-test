@@ -5,9 +5,17 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="name">Name:</label>
-    <input name="name" id="title" value="{{ team.name }}" required>
+  <form method="post" action="{{ url_for('team_detail.update')  }}">
+    <div>
+        <input type="hidden" name="team_id" value="{{ team.id }}" />
+        <label for="name">Name:</label>
+        <span class="viewmode" name="name" id="lb_name">{{ team.name }}</span>
+        <input class="editmode" name="name" id="txt_name" value="{{ team.name }}" >
+        <a id="edit" class="viewmode" href="#!">Edit</a>
+        <input class="editmode" type="submit" value="Save" />
+        <a class="editmode" href="#!">Cancel</a>
+    </div>
+  </form>
     {% if team.contacts|length > 0 %}
         <table>
             <tr>
@@ -19,13 +27,15 @@
                    <td>{{ contact.phone }}</td>
                    <td>{{ contact.email }}</td>
                    <td>{% if contact.custom_attributes|length > 0 %} yes {% else %} no {% endif %}</td>
-                   <td><a class="action" href="{{ url_for('contact_detail.edit', contact_id=contact.id) }}">Edit</a></td>
+                   <td>
+                       <a class="action" href="{{ url_for('contact_detail.edit', contact_id=contact.id) }}">See detail</a>
+                       <a class="action" href="{{ url_for('contact_detail.edit', contact_id=contact.id) }}">Delete</a>
+                   </td>      
                </tr>
            {% endfor %}
         </table>
     {% else %} 
        <label>Team has no contacts</label> 
     {% endif %}
-    <input type="submit" value="Save">
-  </form>
+    <a href="{{ url_for('view.view_teams')  }}" class="return">Back</a>
 {% endblock %}
