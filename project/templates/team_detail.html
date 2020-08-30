@@ -16,6 +16,7 @@
         <a class="editmode" href="#!">Cancel</a>
     </div>
   </form>
+    <hr />
     {% if team.contacts|length > 0 %}
         <table>
             <tr>
@@ -37,5 +38,4 @@
     {% else %} 
        <label>Team has no contacts</label> 
     {% endif %}
-    <a href="{{ url_for('view.view_teams')  }}" class="return">Back</a>
 {% endblock %}

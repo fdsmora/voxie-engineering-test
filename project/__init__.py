@@ -43,4 +43,7 @@ def create_app(test_config=None):
     from . import contact_detail 
     app.register_blueprint(contact_detail.bp)
 
+    from . import search_contacts 
+    app.register_blueprint(search_contacts.bp)
+
     return app

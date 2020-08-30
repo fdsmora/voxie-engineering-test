@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Search Contacts by Phone{% endblock %}</h1>
+<script>
+$(document).ready(
+  function(){
+    $('#btnSearch').click(function(){ 
+        if ($(this).val()=='Search'){
+            var parentForm = $(this).closest('form');
+            var formAction = parentForm.attr('action');
+             
+            parentForm.attr('action',parentForm.attr('action') + '/' + $('#txt_search_by_phone').val());
+        }
+    });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+    <article class="post">
+      <header>
+        <h2>Enter phone number</h2>
+        <form action="{{ url_for('search_contacts.search')  }}"> 
+            <input type="text" id="txt_search_by_phone">
+            <input type="submit" id="btnSearch" value="Search">
+        </form>
+      </header>
+        <div class="table">
+            <div class="tr">
+               <span class="th">Name</span>
+               <span class="th">Phone</span>
+               <span class="th">Email</span>
+               <span class="th">Team</span>
+            </div>
+
+           {% for contact in contacts %}
+            <div class="tr" >
+               <span class="td">
+                  <a class="viewmode" href="{{ url_for('contact_detail.edit', contact_id=contact.id)  }}">{{ contact.name }}</a>
+               </span>
+               <span class="td">
+                  <span class="viewmode">{{ contact.phone}}</span>
+               </span>
+               <span class="td">
+                  <span class="viewmode">{{ contact.email}}</span>
+               </span>
+               <span class="td">
+                  <a class="viewmode" href="{{ url_for('team_detail.view_teams', team_id=contact.team_id)  }}">{{ teams[contact.team_id].name }}</a>
+               </span>
+            </div>
+           {% if not loop.last %}
+             <hr>
+           {% endif %}
+           {% endfor %}
+        </div>
+
+    </article>
+      <hr>
+{% endblock %}

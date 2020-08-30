@@ -9,9 +9,18 @@
 <section class="content">
   <header>
     {% block header %}{% endblock %}
+    <div>
+        <a href="{{ url_for('search_contacts.search')  }}" class="return">Search contacts by phone</a>
+        <br>
+        <a href="{{ url_for('view.view_teams')  }}" class="return">View teams</a>
+    </div>
   </header>
   {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
+<hr />
+<footer>
+<a href="javascript:history.back()" class="return">Back</a>
+</footer>

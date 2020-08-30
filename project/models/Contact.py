@@ -58,6 +58,29 @@ class Contact:
         return contacts
 
     @staticmethod
+    def load_contacts_by_phone(phone):
+        if (phone):
+            db = get_db()
+ 
+            rows = db.execute(
+                'select * from contacts where phone =?', (phone,) 
+            ).fetchall()
+ 
+            return [Contact(id=row['id'],name=row['name'],email=row['email'],phone=row['phone'],team_id=row['team_id']) for row in rows if rows]
+
+        return None 
+
+    @staticmethod
+    def load_all():
+        db = get_db()
+
+        rows = db.execute(
+            'select * from contacts' 
+        ).fetchall()
+
+        return [Contact(id=row['id'],name=row['name'],email=row['email'],phone=row['phone'],team_id=row['team_id']) for row in rows if rows]
+
+    @staticmethod
     def delete(contact_id):
         db = get_db()
         db.execute('DELETE FROM contacts WHERE id = ?', (contact_id,))

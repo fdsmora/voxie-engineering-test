@@ -11,6 +11,6 @@ bp = Blueprint('view', __name__)
 def view_teams():
     teams = [] 
     if request.method == 'GET':
-        teams = Team.load_teams()
+        teams = Team.load_all()
 
     return render_template('view.html', teams=teams)

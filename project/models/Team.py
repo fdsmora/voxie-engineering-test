@@ -18,7 +18,7 @@ class Team:
         db.commit()
 
     @staticmethod
-    def load_teams():
+    def load_all():
         db = get_db()
 
         rows = db.execute(
@@ -28,7 +28,7 @@ class Team:
         return [Team(id=r['id'],name=r['name']) for r in rows if rows]
         
     @staticmethod
-    def load_team(id):
+    def load_by_id(id):
         db = get_db()
 
         team_row = db.execute(

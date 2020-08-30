@@ -23,6 +23,8 @@ div.tr{
 span.td, span.th
 {
     display:table-cell;
+    padding-right:3em;
+    padding-bottom:1em;
 }
 
 span.th

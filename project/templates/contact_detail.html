@@ -31,6 +31,7 @@
         <a class="editmode" href="#!">Cancel</a>
        </div>
     </form>
+    <hr />
     {% if contact.custom_attributes|length > 0 %}
     <form id="frm_cust_attr" method="post" action="{{ url_for('contact_detail.update_custom_attribute') }}">
         <input type="hidden" id="hf_selected_custom_attribute_id" name="custom_attribute_id" value="" />
@@ -64,7 +65,6 @@
     {% else %} 
        <label>Contact has no custom attributes</label> 
     {% endif %}
-    <a href="{{ url_for('team_detail.view_teams', team_id=contact.team_id)  }}" class="return">Back</a>
 
 <script>
 $("#frm_cust_attr input[type='submit']").click(function(){
