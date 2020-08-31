@@ -1,5 +1,36 @@
 # Voxie - Engineer Test
+## Fausto's implementation
+### Notes
+- This project was implemented with Python and Flask. It uses `sqlite` as DB (`MySQL` integration is WIP, see the `mysql` branch for current progress)
+- Other technologies used are `HTML`, `JavaScript`, `CSS`, `jQuery`. I also made use of the template method and adapter design patterns. 
+- Pending features:
+  1. MySQL integration (WIP)
+  2. Bundle into a Docker image for easier deployment and testing. (Currently it only runs with `make import-linux`)
+### How to run
+#### Requirements
+. Python  3
+. Flask v. 1.1.2  
 
+### Steps 
+1. (In case you don't have it) Install Flask:
+`
+pip install Flask
+` 
+2. `git clone https://github.com/fdsmora/voxie-engineering-test`
+3. Start the app:
+`
+source voxie-engineering-test/run_this_app.sh
+` 
+4. In another terminal run:
+`
+make import-linux
+`
+5. Open a browser tab and go to http://localhost:8000. Go ahead and test the app. 
+6. In case you also want to run the tests I wrote, make sure you have `pytest` installed. If not:
+6.1. `pip install pytest coverage`
+6.2. `cd voxie-engineering-test` and run `pytest`
+
+## Original README
 This project provides a starting point for the Voxie engineering test. This repository's goal is to standardize a
 project space for applicants to complete a full-stack project as part of the interview process. We're looking for
 projects in PHP, Python, or Go, but let us know if you'd like to make a case for another language or particular
