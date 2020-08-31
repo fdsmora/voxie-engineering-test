@@ -24,17 +24,28 @@ span.td, span.th
 {
     display:table-cell;
     padding-right:3em;
-    padding-bottom:1em;
+/*    padding-bottom:0.5em; */
 }
 
 span.th
 {
     font-weight: bold; 
+    padding-bottom:0.5em; 
+}
+
+span.td {
+    font: 400 15px Arial;
 }
 
 .return
 {
     float:right;
+}
+
+.search
+{
+    text-align:center;
+    display:inline;
 }
 
 body {
@@ -70,10 +81,10 @@ nav h1 {
   margin: 0;
 }
 
-nav h1 a {
+/*nav h1 a {
   text-decoration: none;
   padding: 0.25rem 0.5rem;
-}
+}*/
 
 nav ul  {
   display: flex;
@@ -86,6 +97,15 @@ nav ul li a, nav ul li span, header .action {
   display: block;
   float: right;
   padding: 0.5rem;
+}
+
+.search .searchbox {
+  display:inline;
+}
+
+#txt_search_by_phone{
+  max-width:10rem;
+  margin: auto;
 }
 
 .content {
@@ -101,6 +121,15 @@ nav ul li a, nav ul li span, header .action {
 .content > header h1 {
   flex: auto;
   margin: 1rem 0 0.25rem 0;
+}
+
+.content > header .action div {
+  margin-bottom: 1.5rem; 
+  font-size:14px;
+}
+
+.viewmode {
+  margin-right:0.5rem;
 }
 
 .flash {
@@ -149,20 +178,31 @@ nav ul li a, nav ul li span, header .action {
   margin-bottom: 0.5em;
 }
 
-.content input, .content textarea {
-  margin-bottom: 1em;
-}
 
 .content textarea {
   min-height: 12em;
   resize: vertical;
 }
 
+#lb_name{
+  padding-right:3rem;
+}
+
 input.danger {
   color: #cc2f2e;
 }
 
-input[type=submit] {
+td, .editable_box input[type=submit], input[type=button]{
   align-self: start;
-  min-width: 10em;
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  color: #377ba8;
+  text-decoration: underline;
+  cursor: pointer;
 }
+
+.editable_box label {
+  width:100px;
+}
+

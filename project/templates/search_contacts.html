@@ -9,7 +9,6 @@ $(document).ready(
         if ($(this).val()=='Search'){
             var parentForm = $(this).closest('form');
             var formAction = parentForm.attr('action');
-             
             parentForm.attr('action',parentForm.attr('action') + '/' + $('#txt_search_by_phone').val());
         }
     });
@@ -19,13 +18,15 @@ $(document).ready(
 
 {% block content %}
     <article class="post">
-      <header>
-        <h2>Enter phone number</h2>
+      <div class="search" >
+        <h3>Enter phone number</h3>
         <form action="{{ url_for('search_contacts.search')  }}"> 
+            <span>
             <input type="text" id="txt_search_by_phone">
             <input type="submit" id="btnSearch" value="Search">
+            </span>
         </form>
-      </header>
+      </div>
         <div class="table">
             <div class="tr">
                <span class="th">Name</span>

@@ -6,7 +6,7 @@
 
 {% block content %}
     <form id="frm_contact" method="post" action="{{ url_for('contact_detail.update_contact')  }}" >
-      <div>
+      <div class="editable_box">
         <input type="hidden" name="contact_id" value="{{ contact.id }}" />
         <input type="hidden" name="team_id" value="{{ contact.team_id }}" />
         <div>
@@ -26,11 +26,12 @@
            <input class="editmode" name="email" id="txt_email" value="{{ contact.email }}">
         </div>
         {% endif %}
-        <a id="edit" class="viewmode" href="#">Edit</a>
+        <input id="edit" class="viewmode" type="button" value="Edit">
         <input class="editmode" type="submit" value="Save" id="btn_save_contact" />
-        <a class="editmode" href="#!">Cancel</a>
+        <input class="editmode" type="button" value="Cancel">
        </div>
     </form>
+    <h3> Custom attributes </h3>
     <hr />
     {% if contact.custom_attributes|length > 0 %}
     <form id="frm_cust_attr" method="post" action="{{ url_for('contact_detail.update_custom_attribute') }}">
@@ -54,9 +55,9 @@
                   <input class="editmode" type="text" id="txt_value_{{ca.id}}" name="value_{{ca.id}}" value="{{ ca.value}}"/>
                </span>
                <span class="td">
-                  <a id="edit_{{ca.id}}" class="viewmode" href="#" >Edit</a>
-                  <input class="editmode" type="submit" value="Save" id="save_{{ca.id}}" />
-                  <a class="editmode" href="#!">Cancel</a>
+                  <input id="edit_{{ca.id}}" class="viewmode" type="button" value="Edit">
+                  <input class="editmode" type="submit" value="Save" id="save_{{ca.id}}" >
+                  <input class="editmode" type="button" value="Cancel">
                </span>
             </div>
            {% endfor %}
