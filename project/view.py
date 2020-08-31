@@ -8,6 +8,7 @@ from project.models.Team import Team
 bp = Blueprint('view', __name__)
 
 @bp.route('/view', methods=('GET',))
+@bp.route('/', methods=('GET',))
 def view_teams():
     teams = [] 
     if request.method == 'GET':
