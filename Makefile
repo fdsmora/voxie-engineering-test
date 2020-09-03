@@ -1,6 +1,7 @@
 SHELL := /bin/bash
 PREFIX?=$(shell pwd)
 IMPORT_CONTAINER=voxie/engineering-test:incoming
+FAUSTO_CONTAINER=faustodsm/voxie-fausto:latest
 
 .PHONY: all
 all: help
@@ -19,6 +20,11 @@ import: ## Send an import JSON request to :8000/import
 import-linux: ## Send an import JSON request to :8000/import on a linux-platform
 	@echo "+ $@"
 	@docker run --rm --env INCOMING_LINUX=1 --network=host ${IMPORT_CONTAINER}
+
+.PHONY: run-app 
+run-app: ## Run the app in localhost:8000
+	@echo "+ $@"
+	@docker run --rm -d -p 8000:5000 ${FAUSTO_CONTAINER}
 
 .PHONY: help
 help:

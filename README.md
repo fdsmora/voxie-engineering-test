@@ -1,12 +1,33 @@
 # Voxie - Engineer Test
 ## Fausto's implementation
+
 ### Notes
 - This project was implemented with Python and Flask. It uses `sqlite` as DB (`MySQL` integration is WIP, see the `mysql` branch for current progress)
 - Other technologies used are `HTML`, `JavaScript`, `CSS`, `jQuery`. I also made use of the template method and adapter design patterns. 
 - Pending features:
-  1. MySQL integration (WIP)
-  2. Bundle into a Docker image for easier deployment and testing. (Currently it only runs with `make import-linux`)
-### How to run
+  - MySQL integration (WIP)
+
+<details>
+  <summary><strong>Table of Contents</strong> (click to expand)</summary>
+
+- [Run with Docker](#Run-with-Docker)
+- [Run without Docker, directly in your box](#Run-without-Docker)
+
+</details>
+
+## Run with Docker
+1. In Linux, open a terminal window and clone the project:
+`git clone https://github.com/fdsmora/voxie-engineering-test`
+
+2. `cd voxie-engineering-test`
+
+3. Start the web application:
+`make run-app`
+
+4. Test it:
+`make import-linux`
+
+## Run without Docker (long way)
 #### Requirements
 . Python  3
 . Flask v. 1.1.2  
