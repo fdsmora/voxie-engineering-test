@@ -1,5 +1,5 @@
-PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
+PRAGMA foreign_keys=ON;
 
 DROP TABLE IF EXISTS teams;
 DROP TABLE IF EXISTS contacts;

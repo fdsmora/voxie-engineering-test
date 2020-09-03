@@ -20,7 +20,6 @@ def import_team():
         if error is not None:
             abort(400, description=error)
 
-        # TODO: Put this into a data model
         insert_team(json_data)
 
         return "INSERTED"
@@ -71,15 +70,16 @@ def insert_custom_attributes(contact):
         
         custom_attributes = contact.get('custom_attributes')
         for ca in custom_attributes or []:
-            db.execute(
+            res = db.execute(
                 'INSERT INTO custom_attributes (contact_id, key, value) VALUES (?,?,?)',
                 (contact.get('id'), ca.get('key'), ca.get('value'))
             )
+            db.commit()
 
 def get_last_table_id(table):
     db = get_db()
 
-    query = 'SELECT id FROM {} order by id desc limit 1'.format(table)
+    query = 'SELECT max(id) FROM {}'.format(table)
     row = db.execute(query).fetchone()
 
     return row[0]

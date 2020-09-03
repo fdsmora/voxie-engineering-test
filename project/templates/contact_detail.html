@@ -45,7 +45,7 @@
             </div>
 
            {% for ca in contact.custom_attributes %}
-            <div class="tr" id="tr_{{ca.id}}">
+            <div class="tr editable_box" id="tr_{{ca.id}}">
                <span class="td">
                   <span class="viewmode" id="lb_key_{{ca.id}}">{{ ca.key }}</span>
                   <input class="editmode" type="text" id="txt_key_{{ca.id}}" name="key_{{ca.id}}" value="{{ ca.key }}"/>

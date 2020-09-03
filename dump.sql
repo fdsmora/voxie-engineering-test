@@ -1,4 +1,3 @@
-PRAGMA foreign_keys = ON
 CREATE TABLE `teams` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT 'My Team',

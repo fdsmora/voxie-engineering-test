@@ -12,6 +12,7 @@ def get_db():
         )
         g.db.row_factory = sqlite3.Row
 
+    g.db.execute("PRAGMA foreign_keys=ON")
     return g.db
 
 def init_db():
