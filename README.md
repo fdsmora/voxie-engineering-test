@@ -29,8 +29,8 @@
 
 ## Run without Docker (long way)
 #### Requirements
-. Python  3
-. Flask v. 1.1.2  
+- Python  3
+- Flask v. 1.1.2  
 
 ### Steps 
 1. (In case you don't have it) Install Flask:
@@ -48,8 +48,9 @@ make import-linux
 `
 5. Open a browser tab and go to http://localhost:8000. Go ahead and test the app. 
 6. In case you also want to run the tests I wrote, make sure you have `pytest` installed. If not:
-6.1. `pip install pytest coverage`
-6.2. `cd voxie-engineering-test` and run `pytest`
+	1. `pip install pytest coverage`
+	2. `cd voxie-engineering-test` 
+	3. Run `pytest`
 
 ## Original README
 This project provides a starting point for the Voxie engineering test. This repository's goal is to standardize a
