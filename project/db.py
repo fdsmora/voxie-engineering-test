@@ -1,30 +1,59 @@
-import sqlite3
 
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
+from flask_mysqldb import MySQL
+from abc import ABC, abstractmethod
+
+
+class DB(ABC):
+
+    @abstractmethod
+    def execute(self, query, params):
+        pass 
+
+    @abstractmethod
+    def commit(self):
+        pass 
+
+    @abstractmethod
+    def close(self):
+        pass 
+
+
+class MYSQL_DB(DB):
+    def __init__(self):
+        self.db = MySQL()
+
+    def execute(self, query, params=None):
+        cur = self.db.connection.cursor()
+        return cur.execute(query, params)
+
+    def commit(self):
+        self.db.connection.commit()
+
+    def close(self):
+        self.db.connection.close()
+
 
 def get_db():
     if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
-        g.db.row_factory = sqlite3.Row
+        g.db = MYSQL_DB()
+        g.db.init_app(current_app)
 
-    g.db.execute("PRAGMA foreign_keys=ON")
     return g.db
 
 def init_db():
     db = get_db()
 
-    with current_app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
+#    with current_app.open_resource('schema.sql') as f:
+#        db.executescript(f.read().decode('utf8'))
 
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
     """Clear the existing data and create new tables."""
+    pass
     init_db()
     click.echo('Initialized the database.')
 

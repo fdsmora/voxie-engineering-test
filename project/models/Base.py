@@ -1,5 +1,6 @@
 from project.db import get_db
 from abc import ABC, abstractmethod
+from flask_mysqldb import MySQL
 
 class Base (ABC):
     db = None
