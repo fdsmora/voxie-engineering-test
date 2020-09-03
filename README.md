@@ -11,7 +11,8 @@
   <summary><strong>Table of Contents</strong> (click to expand)</summary>
 
 - [Run with Docker](#Run-with-Docker)
-- [Run without Docker, directly in your box](#Run-without-Docker)
+- [Run without Docker](#Run-without-Docker)
+- [Original README](#Original-README)
 
 </details>
 
@@ -27,7 +28,7 @@
 4. Test it:
 `make import-linux`
 
-## Run without Docker (long way)
+## Run without Docker
 #### Requirements
 - Python  3
 - Flask v. 1.1.2  
