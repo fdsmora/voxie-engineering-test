@@ -38,6 +38,10 @@ def test_import_team_contacts(client, app):
             ).fetchone()
         assert row[0] == len(data['contacts']) 
         row = db.execute(
-                'SELECT count(*) FROM custom_attributes WHERE contact_id IN (SELECT id from contacts)'
+                'SELECT count(*) FROM custom_attributes ca inner join contacts c on ca.contact_id = c.id'
             ).fetchone()
-        assert row[0] == len(data['contacts'][0]['custom_attributes'])
+        total_custom_attributes = 0
+        for contact in data['contacts']:
+            if 'custom_attributes' in contact:
+                total_custom_attributes += len(contact['custom_attributes'])
+        assert row[0] == total_custom_attributes 
