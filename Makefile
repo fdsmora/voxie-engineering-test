@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 PREFIX?=$(shell pwd)
 IMPORT_CONTAINER=voxie/engineering-test:incoming
-FAUSTO_CONTAINER=faustodsm/voxie-fausto:v2
+FAUSTO_CONTAINER=faustodsm/voxie-fausto:latest
 
 .PHONY: all
 all: help
